@@ -19,6 +19,13 @@
 - [D-009 — Stack técnico (propuesto)](#d-009--stack-técnico-propuesto)
 - [D-010 — Comandos de proyecto para el protocolo de memoria](#d-010--comandos-de-proyecto-para-el-protocolo-de-memoria)
 - [D-011 — Repositorio y rama por defecto](#d-011--repositorio-y-rama-por-defecto)
+- [D-012 — Alcance por iteración definido en términos de usuario (roadmap)](#d-012--alcance-por-iteración-definido-en-términos-de-usuario-roadmap)
+- [D-013 — Dos ejes de crecimiento: sustancia × forma de datos](#d-013--dos-ejes-de-crecimiento-sustancia--forma-de-datos)
+- [D-014 — Grano desde el día 1 y generador sintético parametrizable](#d-014--grano-desde-el-día-1-y-generador-sintético-parametrizable)
+- [D-015 — Torneo de campeones: stab_2 (1 SKU) y stab_3 (varios SKU)](#d-015--torneo-de-campeones-stab_2-1-sku-y-stab_3-varios-sku)
+- [D-016 — Reconciliación: producto (stab_4) antes que geografía (stab_5)](#d-016--reconciliación-producto-stab_4-antes-que-geografía-stab_5)
+- [D-017 — Reglas de salida: archivos+reporte hasta MVP, frontend en evol_1](#d-017--reglas-de-salida-archivosreporte-hasta-mvp-frontend-en-evol_1)
+- [D-018 — Secuencia de iteraciones de estabilización y evolución](#d-018--secuencia-de-iteraciones-de-estabilización-y-evolución)
 
 ---
 
@@ -65,3 +72,31 @@ Dos comandos de Claude Code **a nivel de proyecto** (`.claude/commands/`, versio
 ## D-011 — Repositorio y rama por defecto
 **Estado:** ✔️ Vigente · 2026-06-26
 Repositorio remoto: `https://github.com/jdrodriguez1000/FOCA_Harness.git`. Rama por defecto: `main`. Commits con co-autoría de Claude y mensajes en español.
+
+## D-012 — Alcance por iteración definido en términos de usuario (roadmap)
+**Estado:** ✔️ Vigente · 2026-06-26
+El alcance de cada iteración se define **en términos de usuario** (qué puede hacer el científico de datos / qué recibe el cliente ABC), documentado en `970_documents/roadmap_iteraciones.md`. Es la fuente de verdad del alcance; el detalle fino de cada iteración vivirá en su `1_specification/`.
+
+## D-013 — Dos ejes de crecimiento: sustancia × forma de datos
+**Estado:** ✔️ Vigente · 2026-06-26
+Las iteraciones crecen en **dos ejes independientes**: (a) *sustancia del pipeline* (naïve → des-censura → torneo → reconciliación → newsvendor → operación) y (b) *forma de los datos* (1 SKU×1 sede → varios SKU → jerarquía producto → jerarquía geo). Son perillas distintas.
+
+## D-014 — Grano desde el día 1 y generador sintético parametrizable
+**Estado:** ✔️ Vigente · 2026-06-26
+Todo se construye sobre el grano `Demanda(Producto, Sede, Periodo)` desde el `tracer_bullet`. "1 SKU × 1 sede" es el caso degenerado (|P|=1, |S|=1), no un caso especial. El **generador sintético** se construye una sola vez con perillas (`n_familias, n_categorias, n_subcategorias, n_skus, n_regiones, n_paises, n_ciudades, n_sedes, tasa_de_quiebres, n_periodos…`); cada iteración solo sube perillas, sin reescribir el pipeline. Ver [D-003].
+
+## D-015 — Torneo de campeones: stab_2 (1 SKU) y stab_3 (varios SKU)
+**Estado:** ✔️ Vigente · 2026-06-26
+El paso de naïve a ML se hace vía **torneo de campeones** (retadores compiten, *backtesting* corona al mejor). Se introduce en dos pasos: **`stab_2` = torneo sobre 1 SKU** (montar el mecanismo de coronación en una serie) y **`stab_3` = escalar a varios SKU planos**. El naïve queda como línea base a vencer. Conecta con monitoreo (D-018/evol_3): drift → re-torneo.
+
+## D-016 — Reconciliación: producto (stab_4) antes que geografía (stab_5)
+**Estado:** ✔️ Vigente · 2026-06-26
+La reconciliación jerárquica se introduce en dos pasos separados, de menos a más: **`stab_4` = jerarquía de producto** (familia = suma de SKU) con 1 sede, y **`stab_5` = jerarquía geográfica + reconciliación cruzada** producto × geo. Producto primero, geografía después.
+
+## D-017 — Reglas de salida: archivos+reporte hasta MVP, frontend en evol_1
+**Estado:** ✔️ Vigente · 2026-06-26
+De `tracer_bullet` a `MVP` la salida son **archivos planos (CSV/JSON) + reporte autogenerado (Markdown/HTML)**; la consola solo para logs/resumen, nunca como entregable. El **primer frontend (workbench para el científico de datos) entra en `evol_1`** (no antes — mínima complejidad E4). El **cliente ABC nunca recibe app**: su entregable es un reporte/archivo (coherente con D-001).
+
+## D-018 — Secuencia de iteraciones de estabilización y evolución
+**Estado:** ✔️ Vigente · 2026-06-26
+Secuencia acordada: `tracer_bullet` → `stab_1` (des-censura) → `stab_2` (torneo 1 SKU) → `stab_3` (torneo varios SKU) → `stab_4` (reconc. producto) → `stab_5` (reconc. geo/cruzada) → `MVP` (newsvendor) → `evol_1` (workbench) → `evol_2` (multi-tenant) → `evol_3` (monitoreo/drift) → `final`. Concreta y reordena la metodología genérica de [D-006].

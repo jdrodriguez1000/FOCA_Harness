@@ -32,7 +32,10 @@ Formato sugerido por entrada:
 
 ## Lecciones técnicas
 
-- _(sin entradas todavía)_
+- **L-004 — Construir para el grano hace barato escalar la jerarquía.**
+  - **Contexto:** crecimiento de los datos de "1 SKU × 1 sede" a jerarquías de producto y geografía.
+  - **Lección:** si todo se construye sobre el grano `Demanda(Producto, Sede, Periodo)` desde el inicio, "1 SKU × 1 sede" es el caso degenerado (|P|=1, |S|=1). Escalar es más filas + metadatos de agrupación + reconciliación, **no** reescribir el pipeline. Un generador sintético parametrizable (perillas en 1 al inicio) hace que cada iteración solo "suba perillas".
+  - **Acción:** respetar el grano desde el `tracer_bullet`; construir el generador con perillas desde el primer momento. Ver [decisions.md D-014].
 
 ## Lecciones de proceso (harness/iteraciones)
 
@@ -45,3 +48,8 @@ Formato sugerido por entrada:
   - **Contexto:** definición del harness por el usuario.
   - **Lección:** **Verification (4)** = testing, que funcione. **Validation (5)** = conformidad con la spec, que sea *exactamente* lo pactado (sin scope creep ni gaps).
   - **Acción:** la Validation se ejecuta como checklist contra la Specification de esa iteración.
+
+- **L-005 — Definir el alcance en términos de usuario antes de especificar.**
+  - **Contexto:** sesión S3 — antes de escribir specs, se definió qué hace cada iteración desde la óptica del usuario.
+  - **Lección:** describir el alcance como capacidades de usuario ("puedo hacer X") clarifica el valor de cada iteración, separa la *capacidad* (pipeline) de la *escala* (forma de datos) y evita scope creep. El detalle técnico viene después, en la spec.
+  - **Acción:** mantener `970_documents/roadmap_iteraciones.md` como fuente de verdad del alcance; cada spec de iteración deriva de él.

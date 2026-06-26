@@ -66,11 +66,14 @@ Fase operativa (recurrente): 8) Inferencia · 9) Simulación Montecarlo (escenar
 - ✅ Creado `CLAUDE.md` raíz con el protocolo de memoria.
 - ✅ Creada estructura `.claude/` (settings.json, settings.local.json) y comandos de proyecto `/foca-progress` y `/foca-next`.
 - ✅ Repositorio git inicializado y publicado en GitHub (`origin/main`).
+- ✅ **Alcance por iteración definido en términos de usuario** → `970_documents/roadmap_iteraciones.md` (dos ejes: sustancia del pipeline × forma de los datos).
+- ✅ Decisiones de alcance registradas (D-012 a D-018): torneo de campeones (stab_2 1 SKU → stab_3 varios SKU), reconciliación producto (stab_4) antes que geografía (stab_5), grano desde día 1 + generador parametrizable, salida archivos+reporte hasta MVP, frontend en evol_1.
+- ✅ Esbozada la arquitectura de agentes del harness (specifier → [human review] → planner → tester → executer → evaluator), alineada al ciclo SDD+TDD de `950_guideline/`.
 - ⏳ Stack técnico: PROPUESTO Python + `uv` (pendiente confirmación del usuario).
 
 ## 7. Próximo hito
 
-Redactar `iterations/01_tracer_bullet/1_specification/spec.md`: objetivo, alcance del hilo delgado (las 11 etapas en mínimo), criterios de aceptación y fuera de alcance.
+Con el alcance ya definido (roadmap), los siguientes pasos son: (a) diseñar la **arquitectura de agentes del harness** (T-018) y (b) crear `900_scope/scope_tracer_bullet.md` (T-019, insumo de alcance que aprueba el humano), para luego producir el `spec.md` del tracer_bullet (T-003) vía el agente *specifier*.
 
 ## 8. Bitácora de sesiones
 
@@ -78,3 +81,4 @@ Redactar `iterations/01_tracer_bullet/1_specification/spec.md`: objetivo, alcanc
 |---|---|---|
 | 2026-06-26 | S1 | Encuadre conceptual del proyecto. Definición de iteraciones + harness. Creación de `800_persistence/`, `970_documents/idea.md` y `CLAUDE.md`. |
 | 2026-06-26 | S2 | Tooling: estructura `.claude/` (settings), comandos `/foca-progress` y `/foca-next`. Git inicializado + remoto + `.gitignore` + push inicial a GitHub. |
+| 2026-06-26 | S3 | Lectura de `950_guideline/` (metodología + principios). Definición del **alcance por iteración en términos de usuario** → `970_documents/roadmap_iteraciones.md`. Decisiones D-012 a D-018 (torneo de campeones, reconciliación producto→geo, grano desde día 1 + generador parametrizable, reglas de salida, frontend en evol_1). Esbozo de arquitectura de agentes del harness. |

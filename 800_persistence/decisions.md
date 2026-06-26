@@ -32,6 +32,7 @@
 - [D-022 — Orquestación propia mínima (sin framework)](#d-022--orquestación-propia-mínima-sin-framework)
 - [D-023 — Layout del repositorio (producto en 1000_Project)](#d-023--layout-del-repositorio-producto-en-1000_project)
 - [D-024 — Arquitectura de medallones para los datos](#d-024--arquitectura-de-medallones-para-los-datos)
+- [D-025 — Plantilla de alcance en 980_templates con trazabilidad de pendientes](#d-025--plantilla-de-alcance-en-980_templates-con-trazabilidad-de-pendientes)
 
 ---
 
@@ -130,3 +131,7 @@ El **producto** vive autocontenido en **`1000_Project/`** (incluye `pyproject.to
 ## D-024 — Arquitectura de medallones para los datos
 **Estado:** ✔️ Vigente · 2026-06-26
 Las capas de datos por tenant siguen el patrón **medallón**: 🥉 **bronze** (crudo inmutable del cliente, lo produce la etapa 2 Carga; el generador sintético escribe aquí) → 🥈 **silver** (limpio, validado y des-censurado al grano, etapas 3 Salud + 4 Limpieza, +`stab_1`) → 🥇 **gold** (tablas de features listas para modelar, etapa 6). Las capas **son los contratos estables** entre grupos de etapas (refuerza [D-014]); cada una al grano `Demanda(Producto, Sede, Periodo)` desde el `tracer_bullet`. Validación de esquema (**Pandera**) en cada promoción (bronze laxo, silver/gold estricto). Acceso vía Port **`MedallionStore`** ([D-021]). Lo downstream (modelos, pronósticos, escenarios, reporte) no es capa de datos → va a `models/` y a `runs/<run_id>/`.
+
+## D-025 — Plantilla de alcance en 980_templates con trazabilidad de pendientes
+**Estado:** ✔️ Vigente · 2026-06-26
+El insumo de alcance por iteración ([D-012], `900_scope/scope_<iteracion>.md`) se redacta a partir de una plantilla versionada en **`980_templates/scope_template.md`**. La plantilla expresa el alcance **en términos de usuario** y separa **Alcance IN / Fuera de alcance** (anti scope-creep, fase 5). Incluye un **mecanismo de trazabilidad de pendientes entre iteraciones** con dos secciones espejo: **§5 Pendientes heredados que se resuelven aquí** (apuntan a la §6 de la iteración de origen) y **§6 Pendientes que esta iteración deja para futuras**. La §5 **no aplica al `tracer_bullet`** (primera iteración, sin herencia → "N/A"). La plantilla también recoge perillas del generador ([D-014]), capa medallón por etapa ([D-024]), reglas de salida ([D-017]) y aprobación humana previa a Specification.

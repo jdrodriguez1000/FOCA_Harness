@@ -71,6 +71,7 @@ Fase operativa (recurrente): 8) Inferencia · 9) Simulación Montecarlo (escenar
 - ✅ Esbozada la arquitectura de agentes del harness (specifier → [human review] → planner → tester → executer → evaluator), alineada al ciclo SDD+TDD de `950_guideline/`.
 - ✅ **Stack técnico CONFIRMADO** (D-019): Python 3.12 + `uv` + pandas + Pydantic/Pandera + Nixtla (desde stab_2) + Typer + Jinja2 + pytest + ruff.
 - ✅ **Arquitectura del producto definida** (D-020 a D-024) → `970_documents/arquitectura.md`: capas hexagonal-lite, patrones (Pipeline/Strategy/Ports&Adapters/Config-driven/Builder/Repository), orquestador propio mínimo, layout en `1000_Project/`, y **arquitectura de medallones** (bronze/silver/gold) como contratos estables del pipeline.
+- ✅ **Plantilla de alcance** (D-025) → `980_templates/scope_template.md`: alcance en términos de usuario, Alcance IN / Fuera de alcance, y trazabilidad de pendientes entre iteraciones (§5 heredados / §6 diferidos).
 
 ## 7. Próximo hito
 
@@ -84,3 +85,4 @@ Con el alcance (roadmap) y la **arquitectura del producto** ya definidos, los si
 | 2026-06-26 | S2 | Tooling: estructura `.claude/` (settings), comandos `/foca-progress` y `/foca-next`. Git inicializado + remoto + `.gitignore` + push inicial a GitHub. |
 | 2026-06-26 | S3 | Lectura de `950_guideline/` (metodología + principios). Definición del **alcance por iteración en términos de usuario** → `970_documents/roadmap_iteraciones.md`. Decisiones D-012 a D-018 (torneo de campeones, reconciliación producto→geo, grano desde día 1 + generador parametrizable, reglas de salida, frontend en evol_1). Esbozo de arquitectura de agentes del harness. |
 | 2026-06-26 | S4 | **Arquitectura del producto:** stack confirmado (Python+uv+pandas+Pydantic/Pandera+Nixtla+Typer), patrones (Pipeline/Strategy/Ports&Adapters/Config-driven/Builder/Repository), orquestador propio mínimo, layout en `1000_Project/` y **arquitectura de medallones** (bronze/silver/gold). Decisiones D-019 a D-024. Creado `970_documents/arquitectura.md`. Lección L-006. |
+| 2026-06-26 | S5 | Creada la **plantilla de alcance** `980_templates/scope_template.md` (alcance en términos de usuario, Alcance IN / Fuera de alcance, trazabilidad de pendientes heredados §5 / diferidos §6). Decisión D-025; tarea T-021. |

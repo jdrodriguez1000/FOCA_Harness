@@ -26,6 +26,12 @@
 - [D-016 — Reconciliación: producto (stab_4) antes que geografía (stab_5)](#d-016--reconciliación-producto-stab_4-antes-que-geografía-stab_5)
 - [D-017 — Reglas de salida: archivos+reporte hasta MVP, frontend en evol_1](#d-017--reglas-de-salida-archivosreporte-hasta-mvp-frontend-en-evol_1)
 - [D-018 — Secuencia de iteraciones de estabilización y evolución](#d-018--secuencia-de-iteraciones-de-estabilización-y-evolución)
+- [D-019 — Stack técnico confirmado](#d-019--stack-técnico-confirmado)
+- [D-020 — Arquitectura del producto (hexagonal-lite por capas)](#d-020--arquitectura-del-producto-hexagonal-lite-por-capas)
+- [D-021 — Patrones de diseño](#d-021--patrones-de-diseño)
+- [D-022 — Orquestación propia mínima (sin framework)](#d-022--orquestación-propia-mínima-sin-framework)
+- [D-023 — Layout del repositorio (producto en 1000_Project)](#d-023--layout-del-repositorio-producto-en-1000_project)
+- [D-024 — Arquitectura de medallones para los datos](#d-024--arquitectura-de-medallones-para-los-datos)
 
 ---
 
@@ -62,8 +68,8 @@ Cada iteración pasa por: 1) Specification, 2) Planning, 3) Execution, 4) **Veri
 Carpeta `800_persistence/` con `progress.md`, `tasks.md`, `lessons.md`, `decisions.md`, cada uno con índice navegable. Protocolo: todo agente LEE estos archivos al iniciar sesión y los ACTUALIZA al terminar.
 
 ## D-009 — Stack técnico (propuesto)
-**Estado:** 🕐 Propuesta (pendiente confirmación) · 2026-06-26
-Propuesto: **Python + `uv`** por el ecosistema de forecasting jerárquico (pandas, statsforecast, hierarchicalforecast de Nixtla, simulación Montecarlo). Pendiente confirmación del usuario.
+**Estado:** 🔄 Reemplazada por [D-019] · 2026-06-26
+Propuesto: **Python + `uv`** por el ecosistema de forecasting jerárquico (pandas, statsforecast, hierarchicalforecast de Nixtla, simulación Montecarlo). Confirmado y ampliado en [D-019].
 
 ## D-010 — Comandos de proyecto para el protocolo de memoria
 **Estado:** ✔️ Vigente · 2026-06-26
@@ -100,3 +106,27 @@ De `tracer_bullet` a `MVP` la salida son **archivos planos (CSV/JSON) + reporte 
 ## D-018 — Secuencia de iteraciones de estabilización y evolución
 **Estado:** ✔️ Vigente · 2026-06-26
 Secuencia acordada: `tracer_bullet` → `stab_1` (des-censura) → `stab_2` (torneo 1 SKU) → `stab_3` (torneo varios SKU) → `stab_4` (reconc. producto) → `stab_5` (reconc. geo/cruzada) → `MVP` (newsvendor) → `evol_1` (workbench) → `evol_2` (multi-tenant) → `evol_3` (monitoreo/drift) → `final`. Concreta y reordena la metodología genérica de [D-006].
+
+## D-019 — Stack técnico confirmado
+**Estado:** ✔️ Vigente · 2026-06-26 · confirma [D-009]
+**Python 3.12 + `uv`**. DataFrames con **pandas** (compatibilidad con el ecosistema Nixtla; descartado polars por fricción/sobre-ingeniería para la escala actual). Config/perillas con **Pydantic v2**; contratos de DataFrame con **Pandera**. Forecasting con **Nixtla** (`statsforecast`, `mlforecast`, `hierarchicalforecast`, `utilsforecast`) — entra desde `stab_2`, no en el tracer. Decisión newsvendor/Montecarlo con **numpy/scipy** (MVP). CLI con **Typer**. Reporte con **Jinja2 → Markdown/HTML**. Tests con **pytest**. Lint/format con **ruff**. Logs con stdlib `logging` + `rich`. Formatos: **parquet** intermedio, **CSV/JSON** entregable. Detalle completo en `970_documents/arquitectura.md`.
+
+## D-020 — Arquitectura del producto (hexagonal-lite por capas)
+**Estado:** ✔️ Vigente · 2026-06-26
+Capas con dependencias hacia adentro: **domain** (lógica pura: grano, jerarquías) · **pipeline** (orquestador + 11 etapas con contrato `Stage`) · **models** (estrategias de forecasting) · adaptadores de I/O (**Ports & Adapters**: `DataSource`, `MedallionStore`, `ReportRenderer`) · **config** (perillas). Principio rector: **construir todas las costuras (seams) desde el `tracer_bullet` pero rellenar solo la rebanada mínima** (naïve). Cada capacidad futura entra *dentro* de una etapa existente sin tocar el orquestador (des-censura→`s04`, torneo→`s07`, reconciliación→entre `s07` y `s08`, newsvendor→`s10`). Apoya [D-001] (núcleo sin UI) y [D-014]. Ver `970_documents/arquitectura.md`.
+
+## D-021 — Patrones de diseño
+**Estado:** ✔️ Vigente · 2026-06-26
+(1) **Pipeline/Chain** — las 11 etapas como pasos con contrato `artefacto_entrada → artefacto_salida`. (2) **Strategy + Registry/Factory** — modelos intercambiables; el torneo ([D-015]) registra retadores y corona campeón. (3) **Ports & Adapters** — núcleo aislado de I/O (datos y reporte reemplazables sin tocar el núcleo → habilita evol_1/evol_2 sin reescritura). (4) **Config-driven / Parameter Object** — las perillas de [D-014] como objeto Pydantic validado. (5) **Builder** — el generador sintético parametrizable. (6) **Repository / namespacing por tenant** — acceso a datos por `tenant_id` desde el día 1 (degenerado `demo`).
+
+## D-022 — Orquestación propia mínima (sin framework)
+**Estado:** ✔️ Vigente · 2026-06-26
+Las 11 etapas se ejecutan con un **orquestador propio mínimo**: una lista de etapas con contrato `Stage(ctx) -> StageResult`, ejecutadas en orden, idempotentes y resumibles. **Cero frameworks** (Airflow/Prefect/Dagster) hasta que una iteración de operación lo justifique; la costura del contrato `Stage` permite cambiarlo después sin reescribir las etapas.
+
+## D-023 — Layout del repositorio (producto en 1000_Project)
+**Estado:** ✔️ Vigente · 2026-06-26
+El **producto** vive autocontenido en **`1000_Project/`** (incluye `pyproject.toml`, el paquete `foca/`, `tests/` y `data/`). El **meta-proceso** sigue en las carpetas numéricas de la raíz (`800_persistence/`, `900_scope/`, `950_guideline/`, `970_documents/`, `iterations/`). Los **datos por tenant** usan arquitectura de medallones (ver [D-024]), no carpetas por-etapa; el aislamiento multi-tenant es a nivel de ruta (`data/tenants/<tenant_id>/`) desde el día 1.
+
+## D-024 — Arquitectura de medallones para los datos
+**Estado:** ✔️ Vigente · 2026-06-26
+Las capas de datos por tenant siguen el patrón **medallón**: 🥉 **bronze** (crudo inmutable del cliente, lo produce la etapa 2 Carga; el generador sintético escribe aquí) → 🥈 **silver** (limpio, validado y des-censurado al grano, etapas 3 Salud + 4 Limpieza, +`stab_1`) → 🥇 **gold** (tablas de features listas para modelar, etapa 6). Las capas **son los contratos estables** entre grupos de etapas (refuerza [D-014]); cada una al grano `Demanda(Producto, Sede, Periodo)` desde el `tracer_bullet`. Validación de esquema (**Pandera**) en cada promoción (bronze laxo, silver/gold estricto). Acceso vía Port **`MedallionStore`** ([D-021]). Lo downstream (modelos, pronósticos, escenarios, reporte) no es capa de datos → va a `models/` y a `runs/<run_id>/`.

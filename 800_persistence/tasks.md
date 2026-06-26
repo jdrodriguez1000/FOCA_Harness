@@ -35,7 +35,6 @@
 
 | ID | Tarea | Iteración | Fase harness | Estado |
 |---|---|---|---|---|
-| T-002 | Confirmar stack técnico (propuesto: Python + `uv`) | — | — | 🔜 Pendiente |
 | T-018 | Diseñar la arquitectura de agentes del harness (specifier, planner, tester, executer, evaluator) + estado en filesystem y rúbrica del evaluador | — | — | 🔜 Pendiente |
 | T-019 | Crear `900_scope/scope_tracer_bullet.md` (insumo de alcance del tracer_bullet, aprobado por humano) | tracer_bullet | 1. Specification | 🔜 Pendiente |
 | T-003 | Redactar `spec.md` del tracer_bullet (objetivo, alcance, criterios de aceptación, fuera de alcance) | tracer_bullet | 1. Specification | 🔜 Pendiente |
@@ -61,6 +60,8 @@
 | T-015 | Inicializar git + remoto `origin` + `.gitignore` + commit/push inicial | — | — | ✅ Completada | 2026-06-26 |
 | T-016 | Crear comando de proyecto `/foca-next` (inicio de sesión: cargar contexto) | — | — | ✅ Completada | 2026-06-26 |
 | T-017 | Definir alcance por iteración en términos de usuario y crear `970_documents/roadmap_iteraciones.md` | — | — | ✅ Completada | 2026-06-26 |
+| T-002 | Confirmar stack técnico (Python 3.12 + `uv` + pandas) | — | — | ✅ Completada | 2026-06-26 |
+| T-020 | Diseñar arquitectura del producto (stack, patrones, capas, medallón, layout) y crear `970_documents/arquitectura.md` | — | — | ✅ Completada | 2026-06-26 |
 
 ---
 

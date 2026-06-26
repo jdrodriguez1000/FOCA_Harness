@@ -54,6 +54,10 @@
 | T-001 | Crear `800_persistence/` (memoria del proyecto) con sus 4 archivos indexados | — | — | ✅ Completada | 2026-06-26 |
 | T-011 | Crear `970_documents/idea.md` (visión general del proyecto) | — | — | ✅ Completada | 2026-06-26 |
 | T-012 | Crear `CLAUDE.md` raíz con el protocolo de memoria | — | — | ✅ Completada | 2026-06-26 |
+| T-013 | Crear estructura `.claude/` (settings.json + settings.local.json) | — | — | ✅ Completada | 2026-06-26 |
+| T-014 | Crear comando de proyecto `/foca-progress` (cierre de sesión: memoria + commit + push) | — | — | ✅ Completada | 2026-06-26 |
+| T-015 | Inicializar git + remoto `origin` + `.gitignore` + commit/push inicial | — | — | ✅ Completada | 2026-06-26 |
+| T-016 | Crear comando de proyecto `/foca-next` (inicio de sesión: cargar contexto) | — | — | ✅ Completada | 2026-06-26 |
 
 ---
 

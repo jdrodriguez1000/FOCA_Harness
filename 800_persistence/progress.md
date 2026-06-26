@@ -64,6 +64,8 @@ Fase operativa (recurrente): 8) Inferencia · 9) Simulación Montecarlo (escenar
 - ✅ Creada la carpeta `800_persistence/` (memoria del proyecto) con sus 4 archivos.
 - ✅ Creado `970_documents/idea.md` (visión general del proyecto).
 - ✅ Creado `CLAUDE.md` raíz con el protocolo de memoria.
+- ✅ Creada estructura `.claude/` (settings.json, settings.local.json) y comandos de proyecto `/foca-progress` y `/foca-next`.
+- ✅ Repositorio git inicializado y publicado en GitHub (`origin/main`).
 - ⏳ Stack técnico: PROPUESTO Python + `uv` (pendiente confirmación del usuario).
 
 ## 7. Próximo hito
@@ -75,3 +77,4 @@ Redactar `iterations/01_tracer_bullet/1_specification/spec.md`: objetivo, alcanc
 | Fecha | Sesión | Qué se hizo |
 |---|---|---|
 | 2026-06-26 | S1 | Encuadre conceptual del proyecto. Definición de iteraciones + harness. Creación de `800_persistence/`, `970_documents/idea.md` y `CLAUDE.md`. |
+| 2026-06-26 | S2 | Tooling: estructura `.claude/` (settings), comandos `/foca-progress` y `/foca-next`. Git inicializado + remoto + `.gitignore` + push inicial a GitHub. |

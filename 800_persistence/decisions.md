@@ -17,6 +17,8 @@
 - [D-007 — Harness de 5 fases](#d-007--harness-de-5-fases)
 - [D-008 — Memoria del proyecto en 800_persistence](#d-008--memoria-del-proyecto-en-800_persistence)
 - [D-009 — Stack técnico (propuesto)](#d-009--stack-técnico-propuesto)
+- [D-010 — Comandos de proyecto para el protocolo de memoria](#d-010--comandos-de-proyecto-para-el-protocolo-de-memoria)
+- [D-011 — Repositorio y rama por defecto](#d-011--repositorio-y-rama-por-defecto)
 
 ---
 
@@ -55,3 +57,11 @@ Carpeta `800_persistence/` con `progress.md`, `tasks.md`, `lessons.md`, `decisio
 ## D-009 — Stack técnico (propuesto)
 **Estado:** 🕐 Propuesta (pendiente confirmación) · 2026-06-26
 Propuesto: **Python + `uv`** por el ecosistema de forecasting jerárquico (pandas, statsforecast, hierarchicalforecast de Nixtla, simulación Montecarlo). Pendiente confirmación del usuario.
+
+## D-010 — Comandos de proyecto para el protocolo de memoria
+**Estado:** ✔️ Vigente · 2026-06-26
+Dos comandos de Claude Code **a nivel de proyecto** (`.claude/commands/`, versionados): `/foca-next` (inicio de sesión: carga progreso y próximas tareas vía índice; decisions/lessons a demanda) y `/foca-progress` (cierre de sesión: actualiza la memoria, hace commit y push). `settings.local.json` queda fuera de versión (`.gitignore`).
+
+## D-011 — Repositorio y rama por defecto
+**Estado:** ✔️ Vigente · 2026-06-26
+Repositorio remoto: `https://github.com/jdrodriguez1000/FOCA_Harness.git`. Rama por defecto: `main`. Commits con co-autoría de Claude y mensajes en español.

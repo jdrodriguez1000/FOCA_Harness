@@ -51,7 +51,7 @@ Los agentes son **roles estables por especialidad (P1)**, definidos **una sola v
 | `bdd-writer` | escenarios de comportamiento (BDD) | `scope_<iter>.md` | `behavior.md` | Read, Write, Glob, Grep | Opus |
 | `spec-writer` | especificación técnica | `behavior.md`, `arquitectura.md` | `spec.md` | Read, Write, Glob, Grep | Opus |
 | `plan-writer` | plan de ejecución de la iteración | `spec.md` | `plan.md` | Read, Write, Glob, Grep | Opus |
-| `reviewer` | gate de calidad de documentos (completitud, sin vacíos, sin ambigüedad, conformidad con arquitectura) | el doc + sus insumos | `review_<doc>.json` | Read, Glob, Grep | Opus |
+| `reviewer` | gate de calidad de documentos (completitud, sin vacíos, sin ambigüedad, conformidad con arquitectura) | el doc + sus insumos | `review_<doc>.json` | Read, Glob, Grep, **Write, Skill** | Opus |
 | `tester` | escribe pruebas (RED del TDD) | `spec.md`, `plan.md` | `tests/…` | Read, Write, Edit, Bash | Sonnet |
 | `dev-backend` | código backend (GREEN) | `plan.md`, tests | código en `1000_Project/` | Read, Write, Edit, Bash | Sonnet |
 | `dev-optimizer` | refactor (REFACTOR) sin cambiar comportamiento | código + tests | código refactorizado | Read, Write, Edit, Bash | Sonnet |
@@ -59,6 +59,8 @@ Los agentes son **roles estables por especialidad (P1)**, definidos **una sola v
 | `evaluator` | validación: conformidad con el scope (ni de más ni de menos) + métricas del harness | scope/behavior/spec + artefactos | `/eval/verdict.json`, `/eval/metrics_summary.json` | Read, Glob, Grep, Bash | Opus |
 
 > El **Executor es una familia**: `dev-backend` cubre tracer_bullet → MVP (todo el pipeline Python); **`dev-frontend`** se suma en `evol_1` (workbench). El `reviewer` es **un único agente reusable** invocado en cada gate de documento (behavior, spec, plan) con contexto fresco cada vez.
+
+> **Skill-checklists del `reviewer` (D-030):** las rúbricas de revisión, que son distintas por tipo de documento y largas, se externalizan como **Claude Code Skills** en `.claude/skills/` (`review-behavior`, `review-spec`, `review-plan`), con `user-invocable: false` (maquinaria del harness, ocultas del menú humano). El `reviewer` las invoca con la herramienta `Skill` según el documento que le toque, de modo que **solo carga la checklist del documento que revisa** (el contenido de una skill se inyecta solo al usarse → coste casi nulo hasta entonces). El cuerpo del agente lleva las comprobaciones *transversales* (conformidad con insumos/arquitectura, trazabilidad, autocontención); cada skill lleva las *específicas* del documento. Se construyen incrementalmente junto a su agente escritor: `review-behavior` con `bdd-writer`; `review-spec` con `spec-writer`; `review-plan` con `plan-writer`.
 
 ## 3. Flujo por iteración (las 5 fases)
 

@@ -1,0 +1,20 @@
+{
+  "current_iteration": "tracer_bullet",
+  "current_phase": "1_specification",
+  "sprint_contract": {
+    "definition_of_done": "El cientifico de datos de Triple S corre el proceso completo de las 11 etapas de punta a punta sobre datos de prueba con un solo comando y obtiene un entregable con pronostico naive, aunque el pronostico aun no sea bueno.",
+    "acceptance_criteria": [
+      "Con un solo comando, el cientifico de datos lanza una corrida de punta a punta que termina sin error.",
+      "La corrida atraviesa las 11 etapas y cada una produce su artefacto real (no costuras vacias).",
+      "Quedan materializadas las tres capas medallon (bronze, silver, gold) como archivos del run_id.",
+      "Se genera el entregable de la etapa 10 (CSV/JSON + reporte MD/HTML) en la ubicacion esperada.",
+      "El entregable contiene un pronostico naive para la unica serie y los metadatos de la corrida.",
+      "La corrida es reproducible (misma semilla -> mismos resultados)."
+    ]
+  },
+  "approvals": [
+    {"gate": "scope", "by": "human", "at": "2026-06-26"}
+  ],
+  "change_requests": [],
+  "status": "in_progress"
+}

@@ -20,18 +20,18 @@ uv.lock.local
 # Notebooks
 .ipynb_checkpoints/
 
-# Datos y artefactos (no versionar datos de clientes ABC)
-data/
+# Datos y artefactos runtime (no versionar datos de clientes ABC)
+# OJO: anclado al workspace del producto; NO ignorar el código fuente foca/data/ ni foca/models/
+/1000_Project/data/
 *.parquet
 *.feather
 # CSV/Excel de datos crudos (descomenta si aplica)
 # *.csv
 # *.xlsx
 
-# Modelos entrenados
+# Modelos entrenados (artefactos; viven en el workspace data/ ya ignorado)
 *.pkl
 *.joblib
-models/
 
 # Sistema operativo / editores
 .DS_Store

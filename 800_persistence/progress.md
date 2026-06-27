@@ -23,9 +23,9 @@ Plataforma interna **multi-tenant** (modelo *Service as a Software*) operada por
 
 ## 2. ¿En qué punto estamos?
 
-**Fase actual:** Encuadre conceptual COMPLETO + **arquitectura del harness diseñada**. Construyendo ahora el harness en sí (los agentes en `.claude/agents/`), antes de correr la **Iteración 1 — `tracer_bullet`** por su **Fase 1: Specification**.
+**Fase actual:** Harness en construcción — **bloque de Especificación COMPLETO** (agentes `bdd-writer`, `reviewer`, `spec-writer` + skills `review-behavior`, `review-spec`) y **comandos de operación runtime** (`/foca-init`, `/foca-continue`) listos. La **Iteración 1 — `tracer_bullet`** ya está **arrancada (ritual E10-A vía `/foca-init`)**: estructura de `1000_Project/` (solo carpetas) e `iterations/00_tracer_bullet/` creadas, estado runtime inicializado. Entrando a la **Fase 1: Specification**; el `behavior.md` aún **no** se ha generado (el spawn del `bdd-writer` se difirió).
 
-**Aún NO se ha escrito código de producto.** Estamos respetando la regla del harness: no codear antes de especificar y planear. El alcance del tracer_bullet (`900_scope/scope_tracer_bullet.md`) está en **borrador, pendiente de aprobación humana**.
+**Aún NO se ha escrito código de producto.** `1000_Project/` solo tiene el árbol de carpetas (los `.py` los escribe la Fase 3 Execution). El alcance del tracer_bullet (`900_scope/scope_tracer_bullet.md`) está **aprobado** por el humano (§12, 2026-06-26).
 
 ## 3. Contexto del proyecto
 
@@ -72,10 +72,14 @@ Fase operativa (recurrente): 8) Inferencia · 9) Simulación Montecarlo (escenar
 - ✅ **Stack técnico CONFIRMADO** (D-019): Python 3.12 + `uv` + pandas + Pydantic/Pandera + Nixtla (desde stab_2) + Typer + Jinja2 + pytest + ruff.
 - ✅ **Arquitectura del producto definida** (D-020 a D-024) → `970_documents/arquitectura.md`: capas hexagonal-lite, patrones (Pipeline/Strategy/Ports&Adapters/Config-driven/Builder/Repository), orquestador propio mínimo, layout en `1000_Project/`, y **arquitectura de medallones** (bronze/silver/gold) como contratos estables del pipeline.
 - ✅ **Plantilla de alcance** (D-025) → `980_templates/scope_template.md`: alcance en términos de usuario, Alcance IN / Fuera de alcance, y trazabilidad de pendientes entre iteraciones (§5 heredados / §6 diferidos).
+- ✅ **Bloque de Especificación del harness construido** (T-022): agentes `bdd-writer` (scope→behavior.md), `reviewer` (gate genérico de documentos) y `spec-writer` (behavior+arquitectura→spec.md) en `.claude/agents/`.
+- ✅ **Skill-checklists del reviewer** (D-030): `.claude/skills/review-behavior/` y `review-spec/` (rúbricas largas externalizadas como Skills, invocadas on-demand; subagentes SÍ pueden usar skills → L-008). Corrección de roster: `reviewer` usa `Write`+`Skill`.
+- ✅ **Comandos de operación runtime** (D-031): `/foca-init` (bootstrap E10-A de un solo uso, T-026) y `/foca-continue` (avanza el harness paso a paso leyendo el estado runtime, T-027).
+- ✅ **`tracer_bullet` arrancado (E10-A)**: corrido `/foca-init` — `1000_Project/` (solo carpetas + `.gitkeep`) e `iterations/00_tracer_bullet/` (5 subcarpetas de fase) creadas; estado runtime inicializado (`harness-state.json`, `execution-state.json`, `project-progress.txt`). `bdd-writer` queda `pending` (spawn diferido por el humano).
 
 ## 7. Próximo hito
 
-Con el alcance del tracer_bullet (T-019) y la **arquitectura de agentes del harness** (T-018) ya definidos, el siguiente paso es **construir los agentes** en `.claude/agents/` de forma incremental (E4), empezando por el **bloque Especificación** (`bdd-writer`, `reviewer`, `spec-writer` → T-022). Con esos tres, el Governor puede correr la Fase 1 del tracer_bullet: producir `behavior.md` y `spec.md`. **Pendiente humano:** aprobar `900_scope/scope_tracer_bullet.md` (sigue en borrador) antes de entrar a Fase 1.
+Con el bloque de Especificación construido y el `tracer_bullet` arrancado, el siguiente paso es **correr la Fase 1**: invocar `/foca-continue` para que el Governor spawnee al `bdd-writer` (paso 1 del `orchestration_plan` → `behavior.md`), luego el `reviewer` (skill `review-behavior`) y el **gate humano** de aprobación; después `spec-writer` + `review-spec` + gate. Esto sirve además como **prueba temprana (E9)** del bloque recién construido. En paralelo o a continuación, **construir el bloque Planning** (`plan-writer` + skill `review-plan` → T-023) para no bloquearse al cerrar la Fase 1. Bloques posteriores: Ejecución (T-024) y Verificación/Validación (T-025).
 
 ## 8. Bitácora de sesiones
 
@@ -87,3 +91,4 @@ Con el alcance del tracer_bullet (T-019) y la **arquitectura de agentes del harn
 | 2026-06-26 | S4 | **Arquitectura del producto:** stack confirmado (Python+uv+pandas+Pydantic/Pandera+Nixtla+Typer), patrones (Pipeline/Strategy/Ports&Adapters/Config-driven/Builder/Repository), orquestador propio mínimo, layout en `1000_Project/` y **arquitectura de medallones** (bronze/silver/gold). Decisiones D-019 a D-024. Creado `970_documents/arquitectura.md`. Lección L-006. |
 | 2026-06-26 | S5 | Creada la **plantilla de alcance** `980_templates/scope_template.md` (alcance en términos de usuario, Alcance IN / Fuera de alcance, trazabilidad de pendientes heredados §5 / diferidos §6). Decisión D-025; tarea T-021. |
 | 2026-06-26 | S6 | Creado **`900_scope/scope_tracer_bullet.md`** (T-019, en borrador, pendiente aprobación humana). **Diseñada la arquitectura de agentes del harness** (T-018) → `970_documents/arquitectura_harness.md`: topología bajo restricción de spawning de Claude Code (Governor=A+B en sesión principal; agentes como subagentes hoja), roster de 9 agentes reusables (incl. capa BDD `bdd-writer`→`behavior.md`), flujo por iteración con gates `reviewer`+humano, persistencia runtime (`harness-state.json`/`execution-state.json`/`project-progress.txt`) y rúbrica del evaluador. Decisiones D-026 a D-029. Nuevas tareas T-022 a T-025 (construcción incremental de agentes, E4). |
+| 2026-06-26 | S7 | **Construido el bloque de Especificación** (T-022): agentes `bdd-writer`, `reviewer`, `spec-writer` + skills `review-behavior`, `review-spec` (patrón de skill-checklists, **D-030**; verificado que subagentes pueden usar skills, **L-008**). **Comandos de operación runtime** (**D-031**): `/foca-init` (bootstrap E10-A, T-026) y `/foca-continue` (avance paso a paso, T-027). **Corrido `/foca-init`**: estructura `1000_Project/`+`iterations/00_tracer_bullet/` creada, estado runtime inicializado; `bdd-writer` spawn diferido por el humano (revertido a `pending`). |

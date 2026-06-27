@@ -42,6 +42,11 @@ Formato sugerido por entrada:
   - **Lección:** la forma de honrar "no reescribir el pipeline" (D-014) sin caer en sobre-ingeniería es separar *estructura* de *contenido*: las **costuras** (contrato `Stage`, Ports&Adapters, las 11 etapas, las capas medallón, el generador con perillas) existen completas desde el `tracer_bullet`; el **contenido** se rellena mínimo (naïve) y crece *dentro* de etapas existentes (torneo→s07, newsvendor→s10) sin tocar el orquestador. Los contratos estables son las capas medallón (bronze/silver/gold) y el `Stage`.
   - **Acción:** en cada iteración, preguntar "¿esto cabe dentro de una costura existente?" antes de crear estructura nueva. Stubs vacíos (tournament, decision) son legítimos en el tracer; lógica de más no. Ver [decisions.md D-020], [D-024] y `970_documents/arquitectura.md`.
 
+- **L-008 — Los subagentes de Claude Code SÍ pueden usar skills; externalizar rúbricas largas baja el coste de contexto.**
+  - **Contexto:** sesión S7 — al construir el `reviewer`, que audita 3 tipos de documento con rúbricas distintas y largas, se quiso modularizar los chequeos como skills. Existía la duda de si un subagente (contexto/herramientas acotadas) puede invocar skills.
+  - **Lección:** la documentación de Claude Code lo confirma: un subagente puede (a) **precargar** skills con el campo `skills:` del frontmatter (contenido inyectado al arranque) y (b) **invocarlas on-demand** con la herramienta `Skill` (requiere `Skill` en `tools`; `user-invocable: false` la oculta del menú humano pero NO bloquea la invocación por el agente; `disable-model-invocation: true` sí la bloquea). Como una skill solo carga su cuerpo al usarse, externalizar material de referencia largo (rúbricas) cuesta casi nada hasta que se necesita → el `reviewer` carga solo la checklist del documento que revisa.
+  - **Acción:** verificar capacidades de plataforma antes de comprometer un diseño (igual que [L-007]). Para rúbricas/checklists/procedimientos largos y específicos por caso, preferir skills on-demand sobre inflar el prompt del agente. Ver [decisions.md D-030].
+
 ## Lecciones de proceso (harness/iteraciones)
 
 - **L-002 — Cada iteración es delgada pero completa de punta a punta.**

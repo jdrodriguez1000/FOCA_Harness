@@ -35,7 +35,6 @@
 
 | ID | Tarea | Iteración | Fase harness | Estado |
 |---|---|---|---|---|
-| T-022 | Construir los agentes del **bloque Especificación** en `.claude/agents/` (`bdd-writer`, `reviewer`, `spec-writer`) según `arquitectura_harness.md` | — | — | 🔜 Pendiente |
 | T-023 | Construir el agente `plan-writer` (bloque Planning) | — | — | 🔜 Pendiente |
 | T-024 | Construir los agentes del bloque Ejecución (`tester`, `dev-backend`, `dev-optimizer`) | — | — | 🔜 Pendiente |
 | T-025 | Construir `verificator` y `evaluator` (+ rúbrica calibrada con few-shot, E3) | — | — | 🔜 Pendiente |
@@ -67,6 +66,9 @@
 | T-021 | Crear plantilla de alcance `980_templates/scope_template.md` (con secciones de pendientes heredados/diferidos) | — | — | ✅ Completada | 2026-06-26 |
 | T-019 | Crear `900_scope/scope_tracer_bullet.md` (insumo de alcance, aprobado por humano) | tracer_bullet | 1. Specification | ✅ Completada | 2026-06-26 |
 | T-018 | Diseñar la arquitectura de agentes del harness (topología, roster, flujo, persistencia, rúbrica) → `970_documents/arquitectura_harness.md` + D-026 a D-029 | — | — | ✅ Completada | 2026-06-26 |
+| T-022 | Construir bloque **Especificación** en `.claude/agents/` (`bdd-writer`, `reviewer`, `spec-writer`) + skill-checklists `review-behavior` y `review-spec` (D-030) | — | — | ✅ Completada | 2026-06-26 |
+| T-026 | Crear comando de un solo uso `/foca-init` (bootstrap E10-A: valida scope, crea estructura `1000_Project/`+iteración, inicializa estado runtime, lanza Fase 1 con `bdd-writer`; guard de idempotencia) | tracer_bullet | — | ✅ Completada | 2026-06-26 |
+| T-027 | Crear comando `/foca-continue` (repetible: lee estado runtime `*-state.json`+`project-progress.txt`, diagnostica el paso en curso del `orchestration_plan` y conduce el siguiente — spawnear agente, presentar gate humano o re-spawnear por rechazo) | — | — | ✅ Completada | 2026-06-26 |
 
 ---
 

@@ -1,0 +1,18 @@
+{
+  "iteration": "tracer_bullet",
+  "orchestration_plan": [
+    {"step": 1, "agent": "bdd-writer", "produces": "1_specification/behavior.md"},
+    {"step": 2, "agent": "reviewer", "skill": "review-behavior", "produces": "1_specification/review_behavior.json"},
+    {"step": 3, "gate": "human", "approves": "behavior.md"},
+    {"step": 4, "agent": "spec-writer", "produces": "1_specification/spec.md"},
+    {"step": 5, "agent": "reviewer", "skill": "review-spec", "produces": "1_specification/review_spec.json"},
+    {"step": 6, "gate": "human", "approves": "spec.md"}
+  ],
+  "agents": [
+    {"name": "bdd-writer", "status": "pending", "artifact_path": null},
+    {"name": "reviewer", "status": "pending", "artifact_path": null},
+    {"name": "spec-writer", "status": "pending", "artifact_path": null}
+  ],
+  "checkpoints": [],
+  "early_eval": {}
+}

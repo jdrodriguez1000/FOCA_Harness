@@ -23,9 +23,9 @@ Plataforma interna **multi-tenant** (modelo *Service as a Software*) operada por
 
 ## 2. ¿En qué punto estamos?
 
-**Fase actual:** Encuadre conceptual COMPLETO. A punto de iniciar la **Iteración 1 — `tracer_bullet`**, comenzando por su **Fase 1 del harness: Specification**.
+**Fase actual:** Encuadre conceptual COMPLETO + **arquitectura del harness diseñada**. Construyendo ahora el harness en sí (los agentes en `.claude/agents/`), antes de correr la **Iteración 1 — `tracer_bullet`** por su **Fase 1: Specification**.
 
-**Aún NO se ha escrito código.** Estamos respetando la regla del harness: no codear antes de especificar y planear.
+**Aún NO se ha escrito código de producto.** Estamos respetando la regla del harness: no codear antes de especificar y planear. El alcance del tracer_bullet (`900_scope/scope_tracer_bullet.md`) está en **borrador, pendiente de aprobación humana**.
 
 ## 3. Contexto del proyecto
 
@@ -75,7 +75,7 @@ Fase operativa (recurrente): 8) Inferencia · 9) Simulación Montecarlo (escenar
 
 ## 7. Próximo hito
 
-Con el alcance (roadmap) y la **arquitectura del producto** ya definidos, los siguientes pasos son: (a) diseñar la **arquitectura de agentes del harness** (T-018) y (b) crear `900_scope/scope_tracer_bullet.md` (T-019, insumo de alcance que aprueba el humano), para luego producir el `spec.md` del tracer_bullet (T-003) vía el agente *specifier*.
+Con el alcance del tracer_bullet (T-019) y la **arquitectura de agentes del harness** (T-018) ya definidos, el siguiente paso es **construir los agentes** en `.claude/agents/` de forma incremental (E4), empezando por el **bloque Especificación** (`bdd-writer`, `reviewer`, `spec-writer` → T-022). Con esos tres, el Governor puede correr la Fase 1 del tracer_bullet: producir `behavior.md` y `spec.md`. **Pendiente humano:** aprobar `900_scope/scope_tracer_bullet.md` (sigue en borrador) antes de entrar a Fase 1.
 
 ## 8. Bitácora de sesiones
 
@@ -86,3 +86,4 @@ Con el alcance (roadmap) y la **arquitectura del producto** ya definidos, los si
 | 2026-06-26 | S3 | Lectura de `950_guideline/` (metodología + principios). Definición del **alcance por iteración en términos de usuario** → `970_documents/roadmap_iteraciones.md`. Decisiones D-012 a D-018 (torneo de campeones, reconciliación producto→geo, grano desde día 1 + generador parametrizable, reglas de salida, frontend en evol_1). Esbozo de arquitectura de agentes del harness. |
 | 2026-06-26 | S4 | **Arquitectura del producto:** stack confirmado (Python+uv+pandas+Pydantic/Pandera+Nixtla+Typer), patrones (Pipeline/Strategy/Ports&Adapters/Config-driven/Builder/Repository), orquestador propio mínimo, layout en `1000_Project/` y **arquitectura de medallones** (bronze/silver/gold). Decisiones D-019 a D-024. Creado `970_documents/arquitectura.md`. Lección L-006. |
 | 2026-06-26 | S5 | Creada la **plantilla de alcance** `980_templates/scope_template.md` (alcance en términos de usuario, Alcance IN / Fuera de alcance, trazabilidad de pendientes heredados §5 / diferidos §6). Decisión D-025; tarea T-021. |
+| 2026-06-26 | S6 | Creado **`900_scope/scope_tracer_bullet.md`** (T-019, en borrador, pendiente aprobación humana). **Diseñada la arquitectura de agentes del harness** (T-018) → `970_documents/arquitectura_harness.md`: topología bajo restricción de spawning de Claude Code (Governor=A+B en sesión principal; agentes como subagentes hoja), roster de 9 agentes reusables (incl. capa BDD `bdd-writer`→`behavior.md`), flujo por iteración con gates `reviewer`+humano, persistencia runtime (`harness-state.json`/`execution-state.json`/`project-progress.txt`) y rúbrica del evaluador. Decisiones D-026 a D-029. Nuevas tareas T-022 a T-025 (construcción incremental de agentes, E4). |

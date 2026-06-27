@@ -58,3 +58,8 @@ Formato sugerido por entrada:
   - **Contexto:** sesión S3 — antes de escribir specs, se definió qué hace cada iteración desde la óptica del usuario.
   - **Lección:** describir el alcance como capacidades de usuario ("puedo hacer X") clarifica el valor de cada iteración, separa la *capacidad* (pipeline) de la *escala* (forma de datos) y evita scope creep. El detalle técnico viene después, en la spec.
   - **Acción:** mantener `970_documents/roadmap_iteraciones.md` como fuente de verdad del alcance; cada spec de iteración deriva de él.
+
+- **L-007 — La plataforma (Claude Code) restringe la topología del harness: solo la sesión principal spawnea.**
+  - **Contexto:** sesión S6 — al diseñar la arquitectura de agentes, la metodología genérica asumía una cadena de dos niveles `A ▶ B ▶ Workers`. En Claude Code, solo la sesión principal puede invocar subagentes (tool `Agent`); un subagente es una *hoja* y no puede spawnear a otro. Además, un subagente no puede pedir aprobación al humano.
+  - **Lección:** el diseño del harness no es abstracto; debe acatar las capacidades reales de la plataforma. La metodología se adapta, no al revés. La solución fue fusionar Governor (A) + Orchestrator (B) en la sesión principal (único spawner) y dejar como subagentes frescos solo lo que necesita aislamiento (workers + reviewer + evaluator), preservando lo irrenunciable: P3 (evaluador/reviewer independientes) y E6 (handoff por filesystem).
+  - **Acción:** antes de diseñar cualquier orquestación de agentes, validar contra las restricciones del runtime (quién puede spawnear, quién habla con el humano, contexto fresco vs heredado). La interacción humana siempre la media el Governor. Ver [decisions.md D-026] y `970_documents/arquitectura_harness.md`.

@@ -35,8 +35,10 @@
 
 | ID | Tarea | Iteración | Fase harness | Estado |
 |---|---|---|---|---|
-| T-018 | Diseñar la arquitectura de agentes del harness (specifier, planner, tester, executer, evaluator) + estado en filesystem y rúbrica del evaluador | — | — | 🔜 Pendiente |
-| T-019 | Crear `900_scope/scope_tracer_bullet.md` (insumo de alcance del tracer_bullet, aprobado por humano) usando `980_templates/scope_template.md` | tracer_bullet | 1. Specification | 🔜 Pendiente |
+| T-022 | Construir los agentes del **bloque Especificación** en `.claude/agents/` (`bdd-writer`, `reviewer`, `spec-writer`) según `arquitectura_harness.md` | — | — | 🔜 Pendiente |
+| T-023 | Construir el agente `plan-writer` (bloque Planning) | — | — | 🔜 Pendiente |
+| T-024 | Construir los agentes del bloque Ejecución (`tester`, `dev-backend`, `dev-optimizer`) | — | — | 🔜 Pendiente |
+| T-025 | Construir `verificator` y `evaluator` (+ rúbrica calibrada con few-shot, E3) | — | — | 🔜 Pendiente |
 | T-003 | Redactar `spec.md` del tracer_bullet (objetivo, alcance, criterios de aceptación, fuera de alcance) | tracer_bullet | 1. Specification | 🔜 Pendiente |
 | T-004 | Redactar `plan.md` del tracer_bullet (tareas, riesgos) | tracer_bullet | 2. Planning | 🔜 Pendiente |
 | T-005 | Crear esqueleto del proyecto + `core/` | tracer_bullet | 3. Execution | 🔜 Pendiente |
@@ -63,6 +65,8 @@
 | T-002 | Confirmar stack técnico (Python 3.12 + `uv` + pandas) | — | — | ✅ Completada | 2026-06-26 |
 | T-020 | Diseñar arquitectura del producto (stack, patrones, capas, medallón, layout) y crear `970_documents/arquitectura.md` | — | — | ✅ Completada | 2026-06-26 |
 | T-021 | Crear plantilla de alcance `980_templates/scope_template.md` (con secciones de pendientes heredados/diferidos) | — | — | ✅ Completada | 2026-06-26 |
+| T-019 | Crear `900_scope/scope_tracer_bullet.md` (insumo de alcance, aprobado por humano) | tracer_bullet | 1. Specification | ✅ Completada | 2026-06-26 |
+| T-018 | Diseñar la arquitectura de agentes del harness (topología, roster, flujo, persistencia, rúbrica) → `970_documents/arquitectura_harness.md` + D-026 a D-029 | — | — | ✅ Completada | 2026-06-26 |
 
 ---
 

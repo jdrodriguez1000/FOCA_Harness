@@ -53,7 +53,7 @@ Nunca se salta de `tracer_bullet` a `MVP` directo: se sube por iteraciones de es
 4. **Verification** — **testing**: que lo construido funcione correctamente.
 5. **Validation** — conformidad con la spec: que sea **exactamente** lo pactado (sin scope creep ni gaps).
 
-**No se codea antes de tener Specification y Planning.** Cada iteración deja su rastro en `iterations/<nn>_<nombre>/` con una subcarpeta por fase del harness.
+**No se codea antes de tener Specification y Planning.** Cada iteración deja su rastro en `990_iterations/<nn>_<nombre>/` con una subcarpeta por fase del harness.
 
 ### Pipeline funcional de 11 etapas
 Construcción: 1) Onboarding · 2) Carga · 3) Salud de datos · 4) Limpieza · 5) EDA · 6) Ingeniería de características · 7) Entrenamiento/modelado.
@@ -74,7 +74,7 @@ FOCA_Harness/
 │   └── decisions.md
 ├── 970_documents/          # documentos de visión y referencia
 │   └── idea.md
-└── iterations/             # una carpeta por iteración (se crea al iniciar cada una)
+└── 990_iterations/             # una carpeta por iteración (se crea al iniciar cada una)
     └── <nn>_<nombre>/
         ├── 1_specification/
         ├── 2_planning/

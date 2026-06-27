@@ -33,10 +33,10 @@ test -f 800_persistence/harness-state.json && echo "STATE_OK"
 1. **`800_persistence/harness-state.json`** → `current_iteration`, `current_phase`, `sprint_contract`, `approvals`, `change_requests`, `status`.
 2. **Localiza la carpeta de la iteración** (su nombre termina en `current_iteration`):
    ```bash
-   ls -d iterations/*"$(echo current_iteration)"* 2>/dev/null
+   ls -d 990_iterations/*"$(echo current_iteration)"* 2>/dev/null
    ```
-   Léela como `iterations/<nn>_<current_iteration>/`.
-3. **`iterations/<nn>_<current_iteration>/execution-state.json`** → `orchestration_plan`, `agents` (estado de cada uno), `checkpoints`, `early_eval`.
+   Léela como `990_iterations/<nn>_<current_iteration>/`.
+3. **`990_iterations/<nn>_<current_iteration>/execution-state.json`** → `orchestration_plan`, `agents` (estado de cada uno), `checkpoints`, `early_eval`.
 4. **`800_persistence/project-progress.txt`** → últimas entradas, para el contexto narrativo:
    ```bash
    tail -n 15 800_persistence/project-progress.txt

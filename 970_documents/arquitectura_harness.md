@@ -25,7 +25,7 @@
 
 ```
 SESIÓN PRINCIPAL  =  Governor (A) + Orchestrator (B)   ← único que spawnea
-   │  • determina en qué iteración estamos (lee harness-state.json + iterations/)
+   │  • determina en qué iteración estamos (lee harness-state.json + 990_iterations/)
    │  • persiste orchestration_plan (E12) antes de spawnear
    │  • escribe harness-state.json y execution-state.json
    │  • MEDIA todas las aprobaciones humanas (un subagente no puede preguntarte)
@@ -118,7 +118,7 @@ Dos planos de memoria, complementarios:
 | Archivo | Dueño (Single Writer) | Ubicación | Propósito |
 |---|---|---|---|
 | `harness-state.json` | **Governor (A)** | `800_persistence/harness-state.json` | Estado estratégico global: iteración actual, fase, sprint contract, aprobaciones, CRs. |
-| `execution-state.json` | **Governor como Orchestrator (B)** | `iterations/<nn>_<nombre>/execution-state.json` | Estado técnico **por iteración**: `orchestration_plan` (E12), estado de cada agente, checkpoints (E5), `early_eval` (E9). |
+| `execution-state.json` | **Governor como Orchestrator (B)** | `990_iterations/<nn>_<nombre>/execution-state.json` | Estado técnico **por iteración**: `orchestration_plan` (E12), estado de cada agente, checkpoints (E5), `early_eval` (E9). |
 | `project-progress.txt` | **instancia activa** (la que ejecuta) | `800_persistence/project-progress.txt` | Bitácora narrativa runtime, append-only, con timestamps, checkpoints y bloqueos. |
 
 > `project-progress.txt` (granular, append-only por los agentes) **no sustituye** a `progress.md` (resumen curado al cierre): distinta cadencia y audiencia. **Regla de referencias ligeras (E6):** los agentes registran en estos archivos **paths/IDs**, nunca el contenido de los artefactos.
@@ -147,7 +147,7 @@ Para evitar lenidad sistémica (E3 / methodology §3), el `evaluator` (Instancia
 Coherente con la estructura de `CLAUDE.md` (subcarpeta por fase del harness):
 
 ```
-iterations/<nn>_<nombre>/
+990_iterations/<nn>_<nombre>/
 ├── execution-state.json          # estado técnico de la iteración (Governor-as-B)
 ├── 1_specification/
 │   ├── behavior.md               # bdd-writer
@@ -166,7 +166,7 @@ iterations/<nn>_<nombre>/
         └── metrics_summary.json  # evaluator
 ```
 
-> El `scope_<iter>.md` vive aparte en `900_scope/` (insumo pre-iteración, aprobado por humano antes de entrar a Fase 1). El **código del producto** vive en `1000_Project/` (D-023), no dentro de `iterations/`.
+> El `scope_<iter>.md` vive aparte en `900_scope/` (insumo pre-iteración, aprobado por humano antes de entrar a Fase 1). El **código del producto** vive en `1000_Project/` (D-023), no dentro de `990_iterations/`.
 
 ## 8. Orden de construcción (mínima complejidad E4)
 

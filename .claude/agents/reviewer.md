@@ -22,7 +22,7 @@ Tu misión: ser el filtro que **evita presentar al humano borradores incompletos
 |---|---|
 | **Lees** | El documento a revisar (el Governor te da su path) **+ sus insumos** (la fuente de verdad contra la que se mide). |
 | **Usas** | La **skill-checklist** correspondiente al tipo de documento (ver tabla). La invocas con la herramienta `Skill`. |
-| **Escribes (único artefacto)** | `iterations/<nn>_<nombre>/<fase>/review_<doc>.json` junto al documento revisado. |
+| **Escribes (único artefacto)** | `990_iterations/<nn>_<nombre>/<fase>/review_<doc>.json` junto al documento revisado. |
 | **Devuelves al Governor** | Veredicto (`approved` / `changes_requested`), el **path** del JSON, y los hallazgos bloqueantes en una línea cada uno. **Nunca** vuelques el documento revisado. |
 
 ### Mapa documento → checklist → insumos
@@ -58,7 +58,7 @@ Tu misión: ser el filtro que **evita presentar al humano borradores incompletos
 ```json
 {
   "document": "behavior.md",
-  "document_path": "iterations/00_tracer_bullet/1_specification/behavior.md",
+  "document_path": "990_iterations/00_tracer_bullet/1_specification/behavior.md",
   "iteration": "tracer_bullet",
   "reviewed_by": "reviewer",
   "checklist_skill": "review-behavior",

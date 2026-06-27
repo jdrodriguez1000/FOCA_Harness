@@ -17,12 +17,12 @@ Ejecuta los pasos **en orden**. Si un paso falla o no se cumple una precondició
 ## Paso 0 — Guard de idempotencia (¿ya está iniciado?)
 
 Comprueba si el proyecto ya arrancó. Señales (cualquiera ⇒ ya iniciado):
-- Existe `iterations/00_tracer_bullet/`.
+- Existe `990_iterations/00_tracer_bullet/`.
 - Existe `800_persistence/harness-state.json`.
 - Existe `1000_Project/foca/`.
 
 ```bash
-test -d iterations/00_tracer_bullet && echo "ITER_EXISTS"
+test -d 990_iterations/00_tracer_bullet && echo "ITER_EXISTS"
 test -f 800_persistence/harness-state.json && echo "STATE_EXISTS"
 test -d 1000_Project/foca && echo "PKG_EXISTS"
 ```
@@ -77,11 +77,11 @@ done
 Crea la carpeta de la primera iteración con sus 5 subcarpetas de fase (convención de `CLAUDE.md` y `arquitectura_harness.md §7`):
 
 ```bash
-mkdir -p iterations/00_tracer_bullet/1_specification \
-         iterations/00_tracer_bullet/2_planning \
-         iterations/00_tracer_bullet/3_execution \
-         iterations/00_tracer_bullet/4_verification \
-         iterations/00_tracer_bullet/5_validation/eval
+mkdir -p 990_iterations/00_tracer_bullet/1_specification \
+         990_iterations/00_tracer_bullet/2_planning \
+         990_iterations/00_tracer_bullet/3_execution \
+         990_iterations/00_tracer_bullet/4_verification \
+         990_iterations/00_tracer_bullet/5_validation/eval
 ```
 
 ---
@@ -107,7 +107,7 @@ Como Governor, **crea e inicializa** los tres archivos de estado runtime definid
 }
 ```
 
-**(b) `iterations/00_tracer_bullet/execution-state.json`** (dueño: Governor B). El `orchestration_plan` es el flujo de la Fase 1 (E12, persistido antes de spawnear):
+**(b) `990_iterations/00_tracer_bullet/execution-state.json`** (dueño: Governor B). El `orchestration_plan` es el flujo de la Fase 1 (E12, persistido antes de spawnear):
 ```json
 {
   "iteration": "tracer_bullet",
@@ -134,7 +134,7 @@ Como Governor, **crea e inicializa** los tres archivos de estado runtime definid
 # PROJECT-PROGRESS (runtime, append-only) — bitácora granular del harness
 # No sustituye a progress.md (resumen curado al cierre). Solo paths/IDs, nunca contenido (E6).
 
-[<YYYY-MM-DD HH:MM>] /foca-init — Bootstrap E10-A. Estructura 1000_Project/ y iterations/00_tracer_bullet/ creada. Estado runtime inicializado. Scope aprobado verificado. Entrando a Fase 1 (Specification).
+[<YYYY-MM-DD HH:MM>] /foca-init — Bootstrap E10-A. Estructura 1000_Project/ y 990_iterations/00_tracer_bullet/ creada. Estado runtime inicializado. Scope aprobado verificado. Entrando a Fase 1 (Specification).
 ```
 
 > A medida que avances, **anexa** (no reescribas) entradas a `project-progress.txt` y actualiza el `status` de cada agente en `execution-state.json`.
@@ -146,7 +146,7 @@ Como Governor, **crea e inicializa** los tres archivos de estado runtime definid
 Como Governor (único spawner), invoca al subagente **`bdd-writer`** con la herramienta `Agent`. Pásale instrucciones explícitas y **solo paths** (E6):
 
 - **Insumo:** `900_scope/scope_tracer_bullet.md` (alcance aprobado).
-- **Destino:** debe escribir `iterations/00_tracer_bullet/1_specification/behavior.md`.
+- **Destino:** debe escribir `990_iterations/00_tracer_bullet/1_specification/behavior.md`.
 - **Tarea:** derivar los escenarios de comportamiento (Gherkin, términos de usuario) del scope, con trazabilidad a sus criterios §9, según su propio contrato.
 
 Antes de spawnear, marca en `execution-state.json` el `bdd-writer` como `in_progress`. Cuando devuelva, registra el `artifact_path` y su estado `done`, y anexa una entrada a `project-progress.txt`.
@@ -158,7 +158,7 @@ Antes de spawnear, marca en `execution-state.json` el `bdd-writer` como `in_prog
 ## Paso 6 — Reportar al humano
 
 Resume:
-- ✅ Estructura creada (`1000_Project/` solo carpetas, `iterations/00_tracer_bullet/`).
+- ✅ Estructura creada (`1000_Project/` solo carpetas, `990_iterations/00_tracer_bullet/`).
 - ✅ Estado runtime inicializado (los 3 archivos, con sus paths).
 - ✅ `behavior.md` generado por el `bdd-writer` (su path) + ambigüedades/supuestos que reportó.
 - 🔜 **Siguiente paso:** correr el `reviewer` (skill `review-behavior`) sobre el `behavior.md` y luego presentarte el **gate humano** para aprobarlo. Pregúntale al humano si quiere continuar con la revisión ahora.

@@ -18,10 +18,10 @@ Tu misión: convertir el **comportamiento aprobado** (`behavior.md`, en término
 
 | | |
 |---|---|
-| **Lees (insumo principal)** | `iterations/<nn>_<nombre>/1_specification/behavior.md` — **aprobado** (el Governor te da su path). |
+| **Lees (insumo principal)** | `990_iterations/<nn>_<nombre>/1_specification/behavior.md` — **aprobado** (el Governor te da su path). |
 | **Lees (insumo de conformidad)** | `970_documents/arquitectura.md` — stack, patrones, capas, medallón, layout `1000_Project/`. **Vinculante**: tu spec debe conformar, no contradecir ni reinventar. |
 | **Lees (apoyo)** | `900_scope/scope_<iter>.md` (alcance original), `800_persistence/decisions.md` (decisiones vigentes, vía índice), `970_documents/arquitectura_harness.md` si necesitas ubicar artefactos. Usa índices; no leas todo. |
-| **Escribes (único artefacto)** | `iterations/<nn>_<nombre>/1_specification/spec.md`. |
+| **Escribes (único artefacto)** | `990_iterations/<nn>_<nombre>/1_specification/spec.md`. |
 | **Devuelves al Governor** | El **path** del `spec.md`, y cualquier decisión técnica abierta o conflicto con la arquitectura que detectaste. **Nunca** vuelques el contenido. |
 
 Si el `behavior.md` no está aprobado o falta, **detente** y repórtalo: no se especifica sobre comportamiento no aprobado (P5).

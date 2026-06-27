@@ -1,6 +1,6 @@
 # PROJECT-PROGRESS (runtime, append-only) — bitácora granular del harness
 # No sustituye a progress.md (resumen curado al cierre). Solo paths/IDs, nunca contenido (E6).
 
-[2026-06-26 00:00] /foca-init — Bootstrap E10-A. Estructura 1000_Project/ (solo carpetas + .gitkeep) y iterations/00_tracer_bullet/ (5 subcarpetas de fase) creadas. Estado runtime inicializado (harness-state.json, execution-state.json). Scope aprobado verificado (scope_tracer_bullet.md §12, 2026-06-26). Entrando a Fase 1 (Specification).
-[2026-06-26 00:00] Governor: marcado bdd-writer=in_progress en execution-state.json. Spawneando bdd-writer con insumo 900_scope/scope_tracer_bullet.md -> destino iterations/00_tracer_bullet/1_specification/behavior.md.
+[2026-06-26 00:00] /foca-init — Bootstrap E10-A. Estructura 1000_Project/ (solo carpetas + .gitkeep) y 990_iterations/00_tracer_bullet/ (5 subcarpetas de fase) creadas. Estado runtime inicializado (harness-state.json, execution-state.json). Scope aprobado verificado (scope_tracer_bullet.md §12, 2026-06-26). Entrando a Fase 1 (Specification).
+[2026-06-26 00:00] Governor: marcado bdd-writer=in_progress en execution-state.json. Spawneando bdd-writer con insumo 900_scope/scope_tracer_bullet.md -> destino 990_iterations/00_tracer_bullet/1_specification/behavior.md.
 [2026-06-26 00:00] Governor: spawn de bdd-writer DIFERIDO por el humano (no se ejecutó). bdd-writer revertido a status=pending. Bootstrap E10-A completo; Fase 1 lista para arrancar en su próxima corrida (paso 1 del orchestration_plan pendiente).

@@ -20,7 +20,7 @@ Tu única misión: convertir el **alcance aprobado** de una iteración en **esce
 |---|---|
 | **Lees (insumo principal)** | `900_scope/scope_<iter>.md` — el alcance aprobado por el humano (el Governor te pasa su path en el prompt). |
 | **Lees (apoyo, solo lo necesario)** | `CLAUDE.md`, `970_documents/idea.md` (contexto de negocio), `970_documents/roadmap_iteraciones.md` (eje de crecimiento), `800_persistence/lessons.md` (no repetir errores, p. ej. **L-006**). Usa sus **índices**; no leas archivos completos. |
-| **Escribes (único artefacto)** | `iterations/<nn>_<nombre>/1_specification/behavior.md`. Si la carpeta no existe, créala con `Write`. |
+| **Escribes (único artefacto)** | `990_iterations/<nn>_<nombre>/1_specification/behavior.md`. Si la carpeta no existe, créala con `Write`. |
 | **Devuelves al Governor** | Una respuesta breve: el **path** del `behavior.md`, el número de escenarios, y cualquier ambigüedad o vacío del scope que detectaste. **Nunca** vuelques el contenido del documento. |
 
 Si no se te indica el path del scope o de la iteración, **pídelo** antes de escribir; no adivines la iteración.
@@ -113,7 +113,7 @@ Adapta las secciones al contenido real; no inventes escenarios que el scope no r
    - [ ] ¿Algún `Entonces` afirma solo "la etapa existe/corre"? → conviértelo en resultado real (L-006).
    - [ ] ¿Algún escenario menciona clases/funciones/archivos/librerías? → reescríbelo en términos de usuario.
    - [ ] ¿Toda aserción es observable y verificable?
-6. **Escribe** `iterations/<nn>_<nombre>/1_specification/behavior.md`.
+6. **Escribe** `990_iterations/<nn>_<nombre>/1_specification/behavior.md`.
 7. **Reporta al Governor**: path del artefacto, n.º de escenarios, y la lista de ambigüedades/supuestos (§6) que requieren atención humana o del `spec-writer`. Nada más.
 
 > Recuerda: tu salida pasa por dos gates — el `reviewer` (automático) y el **humano** — antes de que `spec-writer` la use. Entrega completa, sin vacíos y sin ambigüedad latente: eso es justamente lo que el `reviewer` audita.

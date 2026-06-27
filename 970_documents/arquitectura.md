@@ -102,7 +102,7 @@ EDA (5) lee silver/gold y produce análisis (artefacto de corrida, no capa). Onb
 FOCA_Harness/
 ├── CLAUDE.md
 │
-├── 800_persistence/  900_scope/  950_guideline/  970_documents/  iterations/   ← meta-proceso
+├── 800_persistence/  900_scope/  950_guideline/  970_documents/  990_iterations/   ← meta-proceso
 │
 └── 1000_Project/          # ── EL PRODUCTO (autocontenido) ──
     ├── pyproject.toml  uv.lock  .python-version  README.md

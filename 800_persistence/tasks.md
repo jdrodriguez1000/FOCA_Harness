@@ -35,6 +35,7 @@
 
 | ID | Tarea | Iteración | Fase harness | Estado |
 |---|---|---|---|---|
+| T-028 | Ajustar el harness para que el Governor genere y presente el **Sprint Contract** antes de spawnear al `bdd-writer`: crear artefacto `sprint_contract.md` en `1_specification/`, gate de aprobación humana, y persistir en `harness-state.json`; actualizar `/foca-init` o `/foca-continue` según corresponda | tracer_bullet | 1. Specification | 🔜 Pendiente |
 | T-023 | Construir el agente `plan-writer` (bloque Planning) | — | — | 🔜 Pendiente |
 | T-024 | Construir los agentes del bloque Ejecución (`tester`, `dev-backend`, `dev-optimizer`) | — | — | 🔜 Pendiente |
 | T-025 | Construir `verificator` y `evaluator` (+ rúbrica calibrada con few-shot, E3) | — | — | 🔜 Pendiente |

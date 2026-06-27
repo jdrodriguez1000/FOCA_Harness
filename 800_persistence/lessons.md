@@ -49,6 +49,12 @@ Formato sugerido por entrada:
 
 ## Lecciones de proceso (harness/iteraciones)
 
+- **L-009 — El Sprint Contract es el primer artefacto obligatorio del Governor, antes de cualquier agente.**
+  - **Contexto:** S8 — al revisar el flujo del harness, se detectó que `/foca-init` creaba la estructura y ponía al `bdd-writer` en `pending`, pero nunca generaba ni presentaba el Sprint Contract para aprobación humana.
+  - **Lección:** el Sprint Contract no es un paso interno del `bdd-writer`; es responsabilidad del **Governor (A)** redactarlo como *primer acto* de cada fase, presentarlo al humano y obtener aprobación explícita antes de spawnear cualquier agente de trabajo. Sin ese contrato firmado, el agente no tiene mandato claro.
+  - **Acción:** el ajuste T-028 incorpora este paso en el flujo del harness. Al diseñar nuevas fases o comandos, verificar siempre que exista un gate de Sprint Contract antes del primer spawn.
+
+
 - **L-002 — Cada iteración es delgada pero completa de punta a punta.**
   - **Contexto:** metodología tracer_bullet → stab_* → MVP.
   - **Lección:** no se salta de tracer_bullet a MVP; se engruesa de menos a más por `stab_*`.

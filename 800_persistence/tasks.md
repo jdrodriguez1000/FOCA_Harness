@@ -35,6 +35,7 @@
 
 | ID | Tarea | Iteración | Fase harness | Estado |
 |---|---|---|---|---|
+| T-029 | Ajustar `/foca-init` para que cree automáticamente una rama git por iteración (`iter/<nn>_<nombre>`) antes de crear carpetas; el merge a `main` ocurre al cerrar la iteración (Validation aprobada). Incluye reset previo: borrar `990_iterations/` y `1000_Project/` para rehacer la prueba desde cero. | — | — | 🔜 Pendiente |
 | T-028 | Ajustar el harness para que el Governor genere y presente el **Sprint Contract** antes de spawnear al `bdd-writer`: crear artefacto `sprint_contract.md` en `1_specification/`, gate de aprobación humana, y persistir en `harness-state.json`; actualizar `/foca-init` o `/foca-continue` según corresponda | tracer_bullet | 1. Specification | 🔜 Pendiente |
 | T-023 | Construir el agente `plan-writer` (bloque Planning) | — | — | 🔜 Pendiente |
 | T-024 | Construir los agentes del bloque Ejecución (`tester`, `dev-backend`, `dev-optimizer`) | — | — | 🔜 Pendiente |

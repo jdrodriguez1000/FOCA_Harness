@@ -39,6 +39,7 @@
 - [D-029 — Archivos de persistencia runtime del harness](#d-029--archivos-de-persistencia-runtime-del-harness)
 - [D-030 — Rúbricas del reviewer como skill-checklists (Claude Code Skills)](#d-030--rúbricas-del-reviewer-como-skill-checklists-claude-code-skills)
 - [D-031 — Comandos de operación runtime: /foca-init y /foca-continue](#d-031--comandos-de-operación-runtime-foca-init-y-foca-continue)
+- [D-032 — Una rama git por iteración](#d-032--una-rama-git-por-iteración)
 
 ---
 
@@ -165,3 +166,7 @@ El `reviewer` ([D-027]) audita documentos de distinto tipo (`behavior.md`, `spec
 ## D-031 — Comandos de operación runtime: /foca-init y /foca-continue
 **Estado:** ✔️ Vigente · 2026-06-26
 Se añaden dos comandos de proyecto que **operan el harness en runtime** (complementan a `/foca-next` y `/foca-progress` de [D-010], que gestionan la memoria curada): **`/foca-init`** (un solo uso) ejecuta el **ritual de arranque E10-A** — guard de idempotencia, valida el `scope_<iter>.md` aprobado, crea la estructura de `1000_Project/` (solo carpetas + `.gitkeep`; el código `.py` es de Execution, no del bootstrap) y de `990_iterations/<nn>_<iter>/`, inicializa los 3 archivos de estado runtime ([D-029]) y lanza la Fase 1 spawneando al `bdd-writer`. **`/foca-continue`** (repetible) lee el estado runtime (`harness-state.json`, `execution-state.json`, `project-progress.txt`), diagnostica el paso en curso del `orchestration_plan` y **conduce el siguiente** (spawnear el agente que toca, presentar un gate humano sin auto-aprobar, re-spawnear por un rechazo `changes_requested`, o avanzar de fase — bloqueándose si el agente requerido aún no existe, E4). Ambos `disable-model-invocation: true` (manuales). El Governor (sesión principal, [D-026]) es quien los ejecuta y media los gates humanos.
+
+## D-032 — Una rama git por iteración
+**Estado:** ✔️ Vigente · 2026-06-26
+Cada iteración del harness (`tracer_bullet`, `stab_1`, …) se trabaja en su propia rama git con el nombre `iter/<nn>_<nombre>` (ej. `iter/00_tracer_bullet`). **`/foca-init`** debe crear esa rama como primer paso, antes de crear carpetas o artefactos. El merge a `main` ocurre al completar la fase 5 (Validation aprobada). El estado actual — `tracer_bullet` iniciado en `main` — es un caso especial de arranque; se reseteará borrando `990_iterations/` y `1000_Project/` para rehacer `/foca-init` ya con la rama correcta (T-029).

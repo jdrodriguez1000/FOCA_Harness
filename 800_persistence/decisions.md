@@ -132,7 +132,7 @@ Las 11 etapas se ejecutan con un **orquestador propio mínimo**: una lista de et
 
 ## D-023 — Layout del repositorio (producto en 1000_Project)
 **Estado:** ✔️ Vigente · 2026-06-26
-El **producto** vive autocontenido en **`1000_Project/`** (incluye `pyproject.toml`, el paquete `foca/`, `tests/` y `data/`). El **meta-proceso** sigue en las carpetas numéricas de la raíz (`800_persistence/`, `900_scope/`, `950_guideline/`, `970_documents/`, `990_iterations/`). Los **datos por tenant** usan arquitectura de medallones (ver [D-024]), no carpetas por-etapa; el aislamiento multi-tenant es a nivel de ruta (`data/tenants/<tenant_id>/`) desde el día 1.
+El **producto** vive autocontenido en **`1000_Project/`** (incluye `pyproject.toml`, el paquete `foca/`, `tests/` y `data/`). El **meta-proceso** sigue en las carpetas numéricas de la raíz (`800_persistence/`, `900_scope/`, `950_guideline/`, `970_documents/`, `990_iterations/`). *(Actualización S7: la carpeta de iteraciones se renombró de `iterations/` a **`990_iterations/`** para seguir la convención de prefijo numérico del resto del meta-proceso; se actualizaron todas las referencias en comandos, agentes y docs.)* Los **datos por tenant** usan arquitectura de medallones (ver [D-024]), no carpetas por-etapa; el aislamiento multi-tenant es a nivel de ruta (`data/tenants/<tenant_id>/`) desde el día 1.
 
 ## D-024 — Arquitectura de medallones para los datos
 **Estado:** ✔️ Vigente · 2026-06-26
